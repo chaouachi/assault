@@ -2,7 +2,6 @@ import asyncio
 import time
 import os
 import requests
-import pprint
 
 
 def fetch(url):
@@ -13,9 +12,9 @@ def fetch(url):
     return{'status_code': response.status_code,
            'request_time': took}
 
+
 # A function to take unmade requests from a queue, perform the work, and add result to the queue
 async def worker(name, queue, results):
-
     # get the event loop that our current asynchronous code is running within
     loop = asyncio.get_event_loop()
 
@@ -57,12 +56,12 @@ async def distribute_work(url, requests, concurrency, results):
     # print(f'{concurrency} workers took {total_time:.2f} seconds to complete {requests} requests')
 
     # cancel all the tasks to avoid infinite loops
-    for tasks in tasks:
+    for task in tasks:
         task.cancel()
     return total_time
 
 
-# Entrypoint to making requests (SYCHRONUS function)
+# Entry-point to making requests (SYNCHRONOUS function)
 def assault(url, requests, concurrency):
     results = []
     total_time = asyncio.run(distribute_work(url, requests, concurrency, results))
