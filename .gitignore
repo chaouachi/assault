@@ -112,6 +112,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+#env variable
+assault-env/
 
 # Spyder project settings
 .spyderproject
@@ -136,3 +138,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+#output files
+results.json
