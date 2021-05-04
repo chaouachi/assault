@@ -9,6 +9,8 @@ requests = "*"
 numpy = "*"
 pipreqs = "*"
 pre-commit = "*"
+pylint = "*"
+black = "*"
 
 [dev-packages]
 twine = "*"

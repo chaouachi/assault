@@ -1,9 +1,15 @@
+"""
+Calculate statistics on the Results
+doctest with python -m doctest assault/stats.py
+"""
 from typing import List, Dict
 import numpy as np
 
-class Results():
+
+class Results:
     """
-    Results handles calculating statistics based on a list of requests that were made;
+    Results handles calculating statistics based on a list of
+    requests that were made;
     Here is an example of what the information will look like:
     Successful requests 3000
     Slowest 0.010s
@@ -14,9 +20,9 @@ class Results():
     Requests Per Second 1250
     """
 
-    def __init__(self, total_time:float, requests:List[Dict]):
+    def __init__(self, total_time: float, requests: List[Dict]):
         self.total_time = total_time
-        self.requests = sorted(requests, key=lambda r: r['request_time'])
+        self.requests = sorted(requests, key=lambda r: r["request_time"])
 
     def slowest(self) -> float:
         """
@@ -34,7 +40,7 @@ class Results():
         >>> results.slowest()
         6.1
         """
-        return self.requests[-1]['request_time']
+        return self.requests[-1]["request_time"]
 
     def fastest(self) -> float:
         """
@@ -52,7 +58,7 @@ class Results():
         >>> results.fastest()
         1.04
         """
-        return self.requests[0]['request_time']
+        return self.requests[0]["request_time"]
 
     def average_time(self) -> float:
         """
@@ -70,7 +76,7 @@ class Results():
         >>> results.average_time()
         3.513333333333333
         """
-        return np.mean([r['request_time'] for r in self.requests])
+        return np.mean([r["request_time"] for r in self.requests])
 
     def successful_requests(self) -> int:
         """
@@ -88,9 +94,15 @@ class Results():
         >>> results.successful_requests()
         2
         """
-        return len([r['status_code'] for r in self.requests if r['status_code'] in range(200, 299)])
+        return len(
+            [
+                r["status_code"]
+                for r in self.requests
+                if r["status_code"] in range(200, 299)
+            ]
+        )
 
-    def requests_per_minute(self)->int:
+    def requests_per_minute(self) -> int:
         """
 
         :return: the number of requests that could be made in one minute
@@ -108,9 +120,9 @@ class Results():
         17
         """
         # 4/10.6*60
-        return round(len(self.requests)/self.total_time*60)
+        return round(len(self.requests) / self.total_time * 60)
 
-    def requests_per_second(self)->int:
+    def requests_per_second(self) -> int:
         """
 
         :return: the number of requests that could be made in one second
@@ -128,5 +140,4 @@ class Results():
         2
         """
         # 3/1.5
-        return round(len(self.requests)/self.total_time)
-
+        return round(len(self.requests) / self.total_time)

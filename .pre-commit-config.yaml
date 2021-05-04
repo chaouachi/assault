@@ -20,13 +20,22 @@ repos:
         args:
           - --branch
           - master
-  - repo: https://github.com/psf/black
-    rev: 20.8b1
+#  - repo: https://github.com/psf/black
+#    rev: 20.8b1
+#    hooks:
+#      - id: black
+#        args:
+#          - --config=.black.ini
+#          - --quiet
+  - repo: local
     hooks:
-      - id: black
-        args:
-          - --config=.black.ini
-          - --quiet
+        - id: black
+          name: black
+          language: system
+          entry: black
+          minimum_pre_commit_version: 2.9.2
+          require_serial: true
+          types_or: [python, pyi]
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.5.1
     hooks:
@@ -69,23 +78,13 @@ repos:
   - repo: local
     hooks:
       - id: pylint
-        alias: pylint-data
-        name: pylint-data
-        entry: assault-env PYTHONPATH=assault pylint
+        alias: pylint
+        name: pylint
+        entry: env PYTHONPATH=assault pylint
         language: system
         types: [python]
         args:
-          - --rcfile=.pylint.rc
-        files: ^assault/
-      - id: pylint
-        alias: pylint-notebooks
-        name: pylint-notebooks
-        entry: pylint
-        language: system
-        types: [python]
-        args:
-          - --rcfile=.pylint.rc
-          - --disable=C0301,W0104
+          - --rcfile=.pylintrc
         files: ^assault/
 #  - repo: local
 #    hooks:
