@@ -114,6 +114,7 @@ env.bak/
 venv.bak/
 #env variable
 assault-env/
+assault_env/
 
 # Spyder project settings
 .spyderproject
