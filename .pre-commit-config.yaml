@@ -20,22 +20,22 @@ repos:
         args:
           - --branch
           - master
-#  - repo: https://github.com/psf/black
-#    rev: 20.8b1
-#    hooks:
-#      - id: black
-#        args:
-#          - --config=.black.ini
-#          - --quiet
-  - repo: local
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
     hooks:
-        - id: black
-          name: black
-          language: system
-          entry: black
-          minimum_pre_commit_version: 2.9.2
-          require_serial: true
-          types_or: [python, pyi]
+      - id: black
+        args:
+          - --config=.black.ini
+          - --quiet
+#  - repo: local
+#    hooks:
+#        - id: black
+#          name: black
+#          language: system
+#          entry: black
+#          minimum_pre_commit_version: 2.9.2
+#          require_serial: true
+#          types_or: [python, pyi]
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.5.1
     hooks:

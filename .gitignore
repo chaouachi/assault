@@ -150,6 +150,3 @@ results.json
 
 #black
 .black.ini
-
-#flake8
-.flake8
