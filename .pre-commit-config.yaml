@@ -1,0 +1,98 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.1.0
+    hooks:
+      - id: check-byte-order-marker
+      - id: check-ast
+      - id: name-tests-test
+      - id: check-yaml
+      - id: check-json
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args:
+          - –maxkb=500
+      - id: forbid-new-submodules
+      - id: no-commit-to-branch
+        args:
+          - --branch
+          - master
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+        args:
+          - --config=.black.ini
+          - --quiet
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.5.1
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-mock-methods
+      - id: python-no-eval
+      - id: python-use-type-annotations
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.6.2
+    hooks:
+      - id: pyupgrade
+        args: [--py3-plus, --py38-plus]
+#  - repo: https://github.com/pycqa/pydocstyle
+#    rev: 5.0.2
+#    hooks:
+#      - id: pydocstyle
+#        alias: pydocstyle-data
+#        name: pydocstyle-data
+#        args:
+#          - --config=.pydocstyle
+#          - --add-ignore=D100
+#        files: ^src/(data|utils|config.py)
+#      - id: pydocstyle
+#        alias: pydocstyle-notebooks
+#        name: pydocstyle-notebooks
+#        args:
+#          - --config=.pydocstyle
+#          - --add-ignore=D100
+#        files: ^src/notebooks
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.3
+    hooks:
+      - id: flake8
+        args:
+          - --config=.flake8
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.6.2
+    hooks:
+      - id: bandit
+  - repo: local
+    hooks:
+      - id: pylint
+        alias: pylint-data
+        name: pylint-data
+        entry: env PYTHONPATH=assault pylint
+        language: system
+        types: [python]
+        args:
+          - --rcfile=.pylint.rc
+        files: ^(assault)
+      - id: pylint
+        alias: pylint-notebooks
+        name: pylint-notebooks
+        entry: pylint
+        language: system
+        types: [python]
+        args:
+          - --rcfile=.pylint.rc
+          - --disable=C0301,W0104
+        files: ^assault/
+#  - repo: local
+#    hooks:
+#      - id: header_extractor
+#        name: header_extractor
+#        entry: doc/header_extractor.py
+#        language: system
+#        types: [python]
+#        pass_filenames: false
+#        always_run: true

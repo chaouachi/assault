@@ -8,6 +8,7 @@ click = "*"
 requests = "*"
 numpy = "*"
 pipreqs = "*"
+pre-commit = "*"
 
 [dev-packages]
 twine = "*"
