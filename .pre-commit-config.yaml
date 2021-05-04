@@ -76,7 +76,7 @@ repos:
         types: [python]
         args:
           - --rcfile=.pylint.rc
-        files: ^assault
+        files: ^assault/
       - id: pylint
         alias: pylint-notebooks
         name: pylint-notebooks
