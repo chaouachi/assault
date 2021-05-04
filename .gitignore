@@ -145,6 +145,8 @@ results.json
 
 #.idea files
 .idea/workspace.xml
+.idea/assault.iml
+.idea/misc.xml
 
 #pylint
 .pylintrc
