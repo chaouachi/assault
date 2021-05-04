@@ -71,12 +71,12 @@ repos:
       - id: pylint
         alias: pylint-data
         name: pylint-data
-        entry: env PYTHONPATH=assault pylint
+        entry: assault-env PYTHONPATH=assault pylint
         language: system
         types: [python]
         args:
           - --rcfile=.pylint.rc
-        files: ^(assault)
+        files: ^assault
       - id: pylint
         alias: pylint-notebooks
         name: pylint-notebooks
